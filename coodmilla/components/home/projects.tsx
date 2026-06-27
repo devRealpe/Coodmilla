@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/reveal"
+import { Reveal } from "@/components/shared/reveal"
 
 const projects = [
   { tag: "Oro", title: "Sierra Verde", desc: "Antioquia — 45,000 oz/año", color: "text-green" },

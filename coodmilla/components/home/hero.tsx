@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { Reveal } from "@/components/reveal"
+import { Reveal } from "@/components/shared/reveal"
 
 class Particle {
   x = 0

@@ -3,10 +3,10 @@
 import { useRef, useEffect, useState } from "react"
 
 const stats = [
-  { value: 12, suffix: "", label: "Años de experiencia" },
-  { value: 45, suffix: "", label: "Proyectos exitosos" },
-  { value: 800, suffix: "", label: "Empleos directos" },
-  { value: 15, suffix: "", label: "Certificaciones" },
+  { value: 12, label: "Años de experiencia" },
+  { value: 45, label: "Proyectos exitosos" },
+  { value: 800, label: "Empleos directos" },
+  { value: 15, label: "Certificaciones" },
 ]
 
 function Counter({ target }: { target: number }) {

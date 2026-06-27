@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/reveal"
+import { Reveal } from "@/components/shared/reveal"
 
 const pillars = [
   { label: "ISO 14001", color: "bg-gold" },

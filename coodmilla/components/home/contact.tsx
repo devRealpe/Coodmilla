@@ -1,7 +1,7 @@
 "use client"
 
 import type { FormEvent } from "react"
-import { Reveal } from "@/components/reveal"
+import { Reveal } from "@/components/shared/reveal"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -17,7 +17,7 @@ const socialLinks = [
   {
     label: "Facebook",
     href: "#",
-    hoverBg: "hover:bg-[#1877F2]",
+    color: "#1877F2",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -27,7 +27,7 @@ const socialLinks = [
   {
     label: "Instagram",
     href: "#",
-    hoverBg: "hover:bg-[#E4405F]",
+    color: "#E4405F",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-4">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -39,7 +39,7 @@ const socialLinks = [
   {
     label: "LinkedIn",
     href: "#",
-    hoverBg: "hover:bg-[#0A66C2]",
+    color: "#0A66C2",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -51,7 +51,7 @@ const socialLinks = [
   {
     label: "X",
     href: "#",
-    hoverBg: "hover:bg-black",
+    color: "#000000",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -100,7 +100,19 @@ export function Contact() {
                     key={link.label}
                     href={link.href}
                     aria-label={link.label}
-                    className={`flex size-11 items-center justify-center rounded-lg bg-green/8 text-green transition-all duration-350 ${link.hoverBg} hover:text-white hover:-translate-y-1 hover:scale-105`}
+                    className="flex size-11 items-center justify-center rounded-lg transition-all duration-350 hover:-translate-y-1 hover:scale-105"
+                    style={{
+                      color: link.color,
+                      backgroundColor: `${link.color}15`,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#fff"
+                      e.currentTarget.style.backgroundColor = link.color
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = link.color
+                      e.currentTarget.style.backgroundColor = `${link.color}15`
+                    }}
                   >
                     {link.icon}
                   </a>

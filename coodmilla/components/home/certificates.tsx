@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/reveal"
+import { Reveal } from "@/components/shared/reveal"
 
 const certs = [
   { icon: "🌿", title: "ISO 14001", desc: "Gestión ambiental — Compromiso con la protección del entorno." },

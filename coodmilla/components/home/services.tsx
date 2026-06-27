@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/reveal"
+import { Reveal } from "@/components/shared/reveal"
 
 const services = [
   { emoji: "⛏", title: "Exploración geológica", desc: "Estudios geofísicos y perforación diamantina para identificar depósitos minerales con precisión.", color: "text-green", bg: "bg-green/8" },

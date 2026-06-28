@@ -1,3 +1,4 @@
+import { Sidebar } from "@/components/home/sidebar"
 import { Hero } from "@/components/home/hero"
 import { About } from "@/components/home/about"
 import { Services } from "@/components/home/services"
@@ -10,6 +11,7 @@ import { Contact } from "@/components/home/contact"
 export default function HomePage() {
   return (
     <>
+      <Sidebar />
       <Hero />
       <About />
       <Services />

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Pickaxe, Menu, X } from "lucide-react"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -88,6 +89,7 @@ export function Navbar() {
         </ul>
 
         <div className="hidden xl:flex items-center gap-4">
+          <ThemeToggle isScrolled={isScrolled} />
           <Link
             href="/contacto"
             className={cn(
@@ -101,16 +103,19 @@ export function Navbar() {
           </Link>
         </div>
 
-        <button
-          className={cn(
-            "flex xl:hidden items-center justify-center p-2 rounded-lg transition-colors",
-            isScrolled ? "text-foreground hover:bg-black/5" : "text-white hover:bg-white/10"
-          )}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex xl:hidden items-center gap-3">
+          <ThemeToggle isScrolled={isScrolled} />
+          <button
+            className={cn(
+              "flex items-center justify-center p-2 rounded-lg transition-colors",
+              isScrolled ? "text-foreground hover:bg-black/5" : "text-white hover:bg-white/10"
+            )}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

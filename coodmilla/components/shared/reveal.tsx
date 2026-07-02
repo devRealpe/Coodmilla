@@ -6,10 +6,12 @@ export function Reveal({
   children,
   className = "",
   threshold = 0.15,
+  delay = 0,
 }: {
   children: ReactNode
   className?: string
   threshold?: number
+  delay?: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -36,7 +38,7 @@ export function Reveal({
     <div
       ref={ref}
       className={className}
-      style={{ opacity: 0, transform: "translateY(30px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+      style={{ opacity: 0, transform: "translateY(30px)", transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}
     >
       {children}
     </div>

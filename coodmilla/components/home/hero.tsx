@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react"
 import { Reveal } from "@/components/shared/reveal"
+import { Pickaxe, Settings, Globe, Microscope, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 class Particle {
   x = 0
@@ -41,7 +43,7 @@ class Particle {
     const a = this.o * (0.6 + 0.4 * Math.sin(this.p))
     ctx.beginPath()
     ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2)
-    ctx.fillStyle = `rgba(232, 151, 33, ${a})`
+    ctx.fillStyle = `rgba(232, 151, 33, ${a})` // Gold color
     ctx.fill()
   }
 }
@@ -61,14 +63,15 @@ function useParticles(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
     let animId = 0
 
     function resize() {
-      canvas!.width = hero!.offsetWidth
-      canvas!.height = hero!.offsetHeight
+      if (!canvas || !hero) return
+      canvas.width = hero.offsetWidth
+      canvas.height = hero.offsetHeight
     }
 
     resize()
     window.addEventListener("resize", resize)
 
-    const count = Math.min(60, Math.floor(window.innerWidth * 0.035))
+    const count = Math.min(80, Math.floor(window.innerWidth * 0.04))
     particles = Array.from({ length: count }, () => new Particle(canvas!.width, canvas!.height))
 
     function drawLines() {
@@ -77,8 +80,8 @@ function useParticles(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
           const d = Math.sqrt(dx * dx + dy * dy)
-          if (d < 100) {
-            const a = (1 - d / 100) * 0.08
+          if (d < 120) {
+            const a = (1 - d / 120) * 0.08
             ctx!.beginPath()
             ctx!.moveTo(particles[i].x, particles[i].y)
             ctx!.lineTo(particles[j].x, particles[j].y)
@@ -114,63 +117,74 @@ export function Hero() {
   useParticles(canvasRef)
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-dark via-[#0a2a18] to-green px-6 pt-32 pb-16 md:px-10 md:pb-20 md:pt-36">
+    <section className="relative overflow-hidden bg-dark px-6 pt-32 pb-16 md:px-10 md:pb-24 md:pt-40 min-h-[95vh] flex items-center">
+      {/* Background Gradients */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark via-[#081f11] to-green/40 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/20 via-transparent to-transparent pointer-events-none" />
+      
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-10 pointer-events-none"
       />
 
-      <div className="container relative z-20">
-        <div className="grid items-center gap-8 md:grid-cols-[1.2fr_0.8fr] md:gap-12">
-          <div>
+      <div className="container relative z-20 mx-auto">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
+          <div className="max-w-3xl">
             <Reveal>
-              <div className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-gold/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
-                <span className="size-1.5 rounded-full bg-gold" />
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold shadow-[0_0_15px_rgba(232,151,33,0.1)]">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                </span>
                 Operaciones en Colombia
               </div>
             </Reveal>
 
-            <Reveal>
-              <h1 className="text-4xl font-extrabold leading-tight text-white md:text-5xl lg:text-6xl">
-                Minería con <span className="text-gold">propósito</span>
+            <Reveal delay={0.1}>
+              <h1 className="text-5xl font-extrabold leading-[1.1] text-white md:text-6xl lg:text-[4.5rem]" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                Minería con <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-yellow-200">
+                  propósito
+                </span>
               </h1>
             </Reveal>
 
-            <Reveal>
-              <p className="mt-4 max-w-lg text-base leading-relaxed text-white/65 md:text-lg">
-                En Coodmilla integramos tecnología, seguridad y sostenibilidad para desarrollar proyectos mineros que generan valor real.
+            <Reveal delay={0.2}>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70 md:text-xl font-light">
+                En Coodmilla integramos tecnología avanzada, máxima seguridad industrial y sostenibilidad ambiental para desarrollar proyectos mineros que generan valor real.
               </p>
             </Reveal>
 
-            <Reveal>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-green-light hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25"
+            <Reveal delay={0.3}>
+              <div className="mt-10 flex flex-wrap gap-4 items-center">
+                <Link
+                  href="/contacto"
+                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold to-yellow-500 px-8 py-4 text-sm font-bold text-dark transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(232,151,33,0.4)]"
                 >
-                  Solicitar información &rarr;
-                </a>
-                <a
-                  href="#projects"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-gold hover:text-gold hover:-translate-y-0.5"
+                  Solicitar información
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/proyectos"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-8 py-4 text-sm font-bold text-white transition-all hover:border-gold hover:bg-gold/10 hover:text-gold hover:scale-105"
                 >
                   Ver proyectos
-                </a>
+                </Link>
               </div>
             </Reveal>
 
-            <Reveal>
-              <div className="mt-8 flex gap-8 border-t border-white/6 pt-5 md:gap-10">
+            <Reveal delay={0.4}>
+              <div className="mt-16 flex gap-10 border-t border-white/10 pt-8 md:gap-16">
                 {[
-                  { value: "+12", label: "Años" },
-                  { value: "+45", label: "Proyectos" },
-                  { value: "+800", label: "Empleos" },
+                  { value: "+12", label: "Años de Exp." },
+                  { value: "+45", label: "Proyectos Activos" },
+                  { value: "+800", label: "Empleos Generados" },
                 ].map((m) => (
-                  <div key={m.label}>
-                    <div className="text-2xl font-bold text-white md:text-3xl">
-                      <span className="text-gold">{m.value}</span>
+                  <div key={m.label} className="flex flex-col gap-1">
+                    <div className="text-3xl font-extrabold text-white md:text-4xl tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                      <span className="text-transparent bg-clip-text bg-gradient-to-br from-gold to-yellow-200">{m.value}</span>
                     </div>
-                    <p className="mt-0.5 text-xs uppercase tracking-wider text-white/40">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-white/50">
                       {m.label}
                     </p>
                   </div>
@@ -179,20 +193,28 @@ export function Hero() {
             </Reveal>
           </div>
 
-          <div className="hidden md:grid md:grid-cols-2 gap-3">
+          <div className="hidden lg:grid grid-cols-2 gap-4 relative">
+            {/* Glowing effect behind grid */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-gold/20 blur-[100px] rounded-full pointer-events-none" />
+            
             {[
-              { emoji: "⛏", bg: "bg-green" },
-              { emoji: "⚙", bg: "bg-gold", style: { marginTop: "1.5rem" } },
-              { emoji: "🌎", bg: "bg-green-light", style: { marginTop: "-1.5rem" } },
-              { emoji: "🔬", bg: "bg-[#0a1a10]" },
+              { icon: Pickaxe, title: "Extracción", desc: "Minería Responsable", bg: "from-green-900 to-green-950", border: "border-green-500/30" },
+              { icon: Settings, title: "Ingeniería", desc: "Procesos Optimizados", bg: "from-amber-600/20 to-amber-900/20", border: "border-gold/30", style: { marginTop: "2rem" } },
+              { icon: Globe, title: "Impacto", desc: "Desarrollo Local", bg: "from-green-600/20 to-green-900/20", border: "border-green-400/30", style: { marginTop: "-2rem" } },
+              { icon: Microscope, title: "Innovación", desc: "Tecnología Punta", bg: "from-neutral-800 to-neutral-900", border: "border-white/10" },
             ].map((block, i) => (
-              <div
-                key={i}
-                className={`flex aspect-square items-center justify-center rounded-xl text-4xl opacity-85 transition-all duration-400 hover:scale-105 hover:shadow-lg ${block.bg}`}
-                style={block.style}
-              >
-                {block.emoji}
-              </div>
+              <Reveal key={i} delay={0.3 + i * 0.1}>
+                <div
+                  className={`flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br ${block.bg} border ${block.border} backdrop-blur-xl transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:border-gold/50 cursor-pointer group h-48`}
+                  style={block.style}
+                >
+                  <div className="p-4 rounded-full bg-white/10 mb-4 group-hover:scale-110 transition-transform duration-500 group-hover:bg-gold/20">
+                    <block.icon className="h-8 w-8 text-white group-hover:text-gold transition-colors" />
+                  </div>
+                  <h3 className="font-bold text-white tracking-wide" style={{ fontFamily: 'var(--font-montserrat)' }}>{block.title}</h3>
+                  <p className="text-xs text-white/60 mt-1 uppercase tracking-wider font-medium">{block.desc}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>

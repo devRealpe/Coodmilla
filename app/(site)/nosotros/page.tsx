@@ -98,17 +98,17 @@ export default function NosotrosPage() {
             <Reveal>
               <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/20 before:to-transparent">
                 {timeline.map((t, index) => (
-                  <div key={t.year} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                  <div key={t.year} className="relative flex items-center justify-start gap-6 md:gap-0 md:justify-normal md:odd:flex-row-reverse group is-active">
                     
                     <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#05120a] bg-gold shadow shadow-gold/40 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform duration-500 group-hover:scale-125">
                       <span className="w-2 h-2 rounded-full bg-[#05120a]"></span>
                     </div>
                     
-                    <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-500 group-hover:border-gold/30 group-hover:bg-white/10 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-black/20">
+                    <div className="flex-1 min-w-0 md:flex-none md:w-[calc(50%-2.5rem)] p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-500 group-hover:border-gold/30 group-hover:bg-white/10 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-black/20">
                       <div className="flex items-center justify-between mb-2">
                         <span className="font-bold text-gold text-xl" style={{ fontFamily: 'var(--font-montserrat)' }}>{t.year}</span>
                       </div>
-                      <p className="text-sm text-white/70 font-light leading-relaxed">{t.event}</p>
+                      <p className="text-sm text-white/70 font-light leading-relaxed break-words">{t.event}</p>
                     </div>
 
                   </div>

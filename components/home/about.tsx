@@ -27,17 +27,17 @@ export function About() {
               <div className="absolute -bottom-6 -right-6 w-24 h-24 border-b-2 border-r-2 border-green/30 rounded-br-3xl" />
               
               <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-8 shadow-2xl">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {features.map((feature, i) => (
                     <div 
                       key={i}
                       className="group flex flex-col p-5 rounded-2xl bg-white/5 border border-white/5 hover:border-gold/30 hover:bg-white/10 transition-all duration-500 hover:-translate-y-1"
                     >
-                      <div className="mb-4 inline-flex p-3 rounded-xl bg-gradient-to-br from-green-900 to-green-950 text-gold group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-black/20">
+                      <div className="mb-4 inline-flex p-3 rounded-xl bg-gradient-to-br from-green-900 to-green-950 text-gold group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-black/20 w-max">
                         <feature.icon className="h-6 w-6" />
                       </div>
                       <h4 className="font-bold text-white mb-1 tracking-wide text-sm">{feature.title}</h4>
-                      <p className="text-xs text-white/50 leading-relaxed">{feature.desc}</p>
+                      <p className="text-xs text-white/50 leading-relaxed break-words">{feature.desc}</p>
                     </div>
                   ))}
                 </div>

@@ -49,10 +49,10 @@ export function Navbar() {
       <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
           <div className={cn(
-            "flex h-11 w-11 items-center justify-center rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105",
-            isScrolled ? "bg-gradient-to-br from-primary to-green-900 text-primary-foreground shadow-primary/30" : "bg-white/10 backdrop-blur-md text-white border border-white/20"
+            "relative flex h-11 w-11 items-center justify-center rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105 overflow-hidden",
+            isScrolled ? "bg-white/10" : "bg-white/10"
           )}>
-            <Pickaxe className="h-6 w-6 drop-shadow-md" />
+            <img src="/logo.jpeg" alt="Coodmilla Logo" className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col">
             <span className={cn(

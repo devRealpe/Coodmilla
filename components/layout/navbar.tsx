@@ -19,7 +19,7 @@ const navLinks = [
 function useScrollY() {
   return useSyncExternalStore(
     (cb) => {
-      if (typeof window === 'undefined') return () => {}
+      if (typeof window === 'undefined') return () => { }
       window.addEventListener("scroll", cb, { passive: true })
       return () => window.removeEventListener("scroll", cb)
     },
@@ -99,7 +99,7 @@ export function Navbar() {
                 : "bg-white text-dark hover:bg-gold hover:text-white border border-transparent"
             )}
           >
-            Portal Asociados
+            Contactanos
           </Link>
         </div>
 

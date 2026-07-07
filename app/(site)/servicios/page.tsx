@@ -45,37 +45,60 @@ export default function ServiciosPage() {
         description="Desde la exploración hasta el cierre de minas, ofrecemos un portafolio integral con los más altos estándares de calidad, seguridad y sostenibilidad."
       />
 
-      {categories.map((cat) => (
-        <section key={cat.title} className="bg-white py-16 md:py-20 even:bg-cream">
-          <div className="container">
-            <Reveal>
-              <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-green">
-                {cat.title}
-              </span>
-              <h2 className="text-3xl font-extrabold leading-tight text-dark md:text-4xl">
-                {cat.title}
-              </h2>
-              <p className="mt-3 max-w-lg text-sm leading-relaxed text-text-muted md:text-base">
-                {cat.desc}
-              </p>
-            </Reveal>
+      <div className="bg-dark">
+        {categories.map((cat, i) => (
+          <section key={cat.title} className="relative overflow-hidden py-16 md:py-24 border-b border-white/5 last:border-b-0">
+            {/* Background Effects */}
+            <div className={`absolute inset-0 ${i % 2 === 0 ? 'bg-[#06140a]' : 'bg-dark'} pointer-events-none`} />
+            <div className={`absolute ${i % 2 === 0 ? '-right-40' : '-left-40'} top-0 w-96 h-96 bg-gold/5 rounded-full blur-[100px] pointer-events-none`} />
+            
+            <div className="container relative z-10 mx-auto px-6">
+              <Reveal>
+                <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold shadow-[0_0_15px_rgba(232,151,33,0.1)]">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                  </span>
+                  {cat.title}
+                </span>
+                <h2 className="text-3xl font-extrabold leading-tight text-white md:text-4xl tracking-tight mt-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  {cat.title}
+                </h2>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 font-light">
+                  {cat.desc}
+                </p>
+              </Reveal>
 
-            <div className="mt-8 grid gap-5 md:grid-cols-3">
-              {cat.services.map((s) => (
-                <Reveal key={s.name}>
-                  <div className="group rounded-xl border border-border bg-white p-6 transition-all duration-400 hover:-translate-y-1.5 hover:border-green hover:shadow-lg hover:shadow-green/8 before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-gold before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100 relative overflow-hidden">
-                    <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-green/8 text-lg text-green transition-transform duration-300 group-hover:scale-110">
-                      {s.emoji}
+              <div className="mt-12 grid gap-6 md:grid-cols-3">
+                {cat.services.map((s, idx) => (
+                  <Reveal key={s.name} delay={idx * 0.1}>
+                    <div className="group relative h-full rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(232,151,33,0.15)] hover:border-gold/30 overflow-hidden">
+                      {/* Hover subtle background shift */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/0 to-gold/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+                      
+                      <div className="relative z-10 flex flex-col h-full">
+                        <div className="mb-6 relative flex h-16 w-16 items-center justify-center rounded-2xl bg-black/20 backdrop-blur-sm border border-white/5 shadow-inner transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
+                          <span className="text-3xl drop-shadow-[0_0_10px_currentColor]">{s.emoji}</span>
+                        </div>
+                        
+                        <h3 className="text-lg font-bold text-white mb-2 tracking-wide group-hover:text-gold transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                          {s.name}
+                        </h3>
+                        
+                        <p className="mt-1.5 text-sm leading-relaxed text-white/60 font-light flex-1 group-hover:text-white/80 transition-colors">
+                          {s.detail}
+                        </p>
+
+                        <div className="mt-6 w-8 h-1 bg-white/10 rounded-full transition-all duration-500 group-hover:w-16 group-hover:bg-gold" />
+                      </div>
                     </div>
-                    <h3 className="text-sm font-bold text-dark">{s.name}</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-text-muted">{s.detail}</p>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        ))}
+      </div>
     </>
   )
 }

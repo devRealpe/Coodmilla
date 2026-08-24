@@ -1,134 +1,161 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Reveal } from "@/components/shared/reveal"
-import { Pickaxe, Settings, Globe, Microscope, ArrowRight } from "lucide-react"
+import { Pickaxe, Settings, Globe, Microscope, ArrowRight, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
+import { type CarruselItem, resolveAssetUrl } from "@/lib/api"
 
-class Particle {
-  x = 0
-  y = 0
-  s = 1
-  sx = 0
-  sy = 0
-  o = 0.2
-  p = 0
-  w = 0
-  h = 0
+// ─── Bloque decorativo estático (fallback si el carrusel está vacío) ──────────
+const STATIC_BLOCKS = [
+  { icon: Pickaxe, title: "Extracción", desc: "Minería Responsable", bg: "from-green-100 to-green-200 dark:from-green-900 dark:to-green-950", border: "border-green-300 dark:border-green-500/30" },
+  { icon: Settings, title: "Ingeniería", desc: "Procesos Optimizados", bg: "from-amber-100 to-amber-200 dark:from-amber-600/20 dark:to-amber-900/20", border: "border-amber-300 dark:border-gold/30", style: { marginTop: "2rem" } },
+  { icon: Globe, title: "Impacto", desc: "Desarrollo Local", bg: "from-green-100/50 to-green-200/50 dark:from-green-600/20 dark:to-green-900/20", border: "border-green-300 dark:border-green-400/30", style: { marginTop: "-2rem" } },
+  { icon: Microscope, title: "Innovación", desc: "Tecnología Punta", bg: "from-foreground/5 to-foreground/10 dark:from-neutral-800 dark:to-neutral-900", border: "border-foreground/10 dark:border-white/10" },
+]
 
-  constructor(w: number, h: number) {
-    this.w = w
-    this.h = h
-    this.reset()
+// Particles and background have been moved to PageBackground component.
+
+// ─── Carrusel dinámico ────────────────────────────────────────────────────────
+function CarruselDinamico({ items }: { items: CarruselItem[] }) {
+  const [current, setCurrent] = useState(0)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const resetTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      setCurrent((c) => (c + 1) % items.length)
+    }, 4000)
   }
 
-  reset() {
-    this.x = Math.random() * this.w
-    this.y = Math.random() * this.h
-    this.s = Math.random() * 1.8 + 0.3
-    this.sx = (Math.random() - 0.5) * 0.25
-    this.sy = (Math.random() - 0.5) * 0.25
-    this.o = Math.random() * 0.4 + 0.05
-    this.p = Math.random() * Math.PI * 2
-  }
-
-  update() {
-    this.x += this.sx
-    this.y += this.sy
-    this.p += 0.015
-    if (this.x < 0 || this.x > this.w || this.y < 0 || this.y > this.h) this.reset()
-  }
-
-  draw(ctx: CanvasRenderingContext2D) {
-    const a = this.o * (0.6 + 0.4 * Math.sin(this.p))
-    ctx.beginPath()
-    ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2)
-    ctx.fillStyle = `rgba(232, 151, 33, ${a})` // Gold color
-    ctx.fill()
-  }
-}
-
-function useParticles(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    resetTimer()
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items.length])
 
-    const hero = canvas.parentElement
-    if (!hero) return
+  const prev = () => { setCurrent((c) => (c - 1 + items.length) % items.length); resetTimer() }
+  const next = () => { setCurrent((c) => (c + 1) % items.length); resetTimer() }
 
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let particles: Particle[] = []
-    let animId = 0
-
-    function resize() {
-      if (!canvas || !hero) return
-      canvas.width = hero.offsetWidth
-      canvas.height = hero.offsetHeight
-    }
-
-    resize()
-    window.addEventListener("resize", resize)
-
-    const count = Math.min(80, Math.floor(window.innerWidth * 0.04))
-    particles = Array.from({ length: count }, () => new Particle(canvas!.width, canvas!.height))
-
-    function drawLines() {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const d = Math.sqrt(dx * dx + dy * dy)
-          if (d < 120) {
-            const a = (1 - d / 120) * 0.08
-            ctx!.beginPath()
-            ctx!.moveTo(particles[i].x, particles[i].y)
-            ctx!.lineTo(particles[j].x, particles[j].y)
-            ctx!.strokeStyle = `rgba(232, 151, 33, ${a})`
-            ctx!.lineWidth = 0.5
-            ctx!.stroke()
-          }
-        }
-      }
-    }
-
-    function loop() {
-      ctx!.clearRect(0, 0, canvas!.width, canvas!.height)
-      for (const p of particles) {
-        p.update()
-        p.draw(ctx!)
-      }
-      drawLines()
-      animId = requestAnimationFrame(loop)
-    }
-
-    animId = requestAnimationFrame(loop)
-
-    return () => {
-      cancelAnimationFrame(animId)
-      window.removeEventListener("resize", resize)
-    }
-  }, [canvasRef])
-}
-
-export function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  useParticles(canvasRef)
+  const item = items[current]
 
   return (
-    <section className="relative overflow-hidden bg-dark px-6 pt-32 pb-16 md:px-10 md:pb-24 md:pt-40 min-h-[95vh] flex items-center">
-      {/* Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark via-[#081f11] to-green/40 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/20 via-transparent to-transparent pointer-events-none" />
-      
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 z-10 pointer-events-none"
-      />
+    <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(232,151,33,0.15)] group">
+      {/* Imagen */}
+      <div className="relative w-full h-full">
+        {items.map((it, i) => {
+          const imagenAbsoluta = resolveAssetUrl(it.imagenUrl)
+          return (
+            <div
+              key={it.id}
+              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${i === current ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
+            >
+              <Image
+                src={imagenAbsoluta}
+                alt={it.titulo}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority={i === 0}
+              />
+            </div>
+          )
+        })}
+        {/* Overlay gradiente */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+      </div>
 
+      {/* Info del slide */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 p-6 md:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+        <div className="bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/10 inline-block max-w-[90%] shadow-xl">
+          <p className="text-sm md:text-lg font-bold uppercase tracking-widest text-gold mb-1">{item.titulo}</p>
+          {item.linkUrl && (
+            <Link
+              href={item.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-white/80 hover:text-gold transition-colors mt-1"
+            >
+              Conoce más <ExternalLink className="size-4" />
+            </Link>
+          )}
+        </div>
+      </div>
+
+      {/* Controles de navegación */}
+      {items.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            aria-label="Anterior"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-gold hover:border-gold hover:scale-110"
+          >
+            <ChevronLeft className="size-4" />
+          </button>
+          <button
+            onClick={next}
+            aria-label="Siguiente"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-gold hover:border-gold hover:scale-110"
+          >
+            <ChevronRight className="size-4" />
+          </button>
+
+          {/* Indicadores */}
+          <div className="absolute top-4 right-4 z-20 flex gap-1.5">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { setCurrent(i); resetTimer() }}
+                aria-label={`Slide ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-gold" : "w-1.5 bg-white/40 hover:bg-white/70"}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
+// ─── Bloque decorativo estático (fallback) ────────────────────────────────────
+function StaticBlocks() {
+  return (
+    <div className="grid grid-cols-2 gap-4 relative h-full">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-gold/20 blur-[100px] rounded-full pointer-events-none" />
+      {STATIC_BLOCKS.map((block, i) => (
+        <Reveal key={i} delay={0.3 + i * 0.1}>
+          <div
+            className={`flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br ${block.bg} border ${block.border} backdrop-blur-xl transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:border-gold/50 cursor-pointer group h-48`}
+            style={block.style}
+          >
+            <div className="p-4 rounded-full bg-foreground/5 dark:bg-white/10 mb-4 group-hover:scale-110 transition-transform duration-500 group-hover:bg-gold/20">
+              <block.icon className="h-8 w-8 text-foreground dark:text-white group-hover:text-gold transition-colors" />
+            </div>
+            <h3 className="font-bold text-foreground tracking-wide" style={{ fontFamily: "var(--font-montserrat)" }}>{block.title}</h3>
+            <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider font-medium">{block.desc}</p>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  )
+}
+
+// ─── Props ────────────────────────────────────────────────────────────────────
+interface HeroProps {
+  /** Items del carrusel, pre-fetched en el Server Component padre */
+  carruselItems?: CarruselItem[]
+}
+
+export function Hero({ carruselItems = [] }: HeroProps) {
+
+  const tieneCarrusel = carruselItems.length > 0
+
+  return (
+    <section id="hero" className="relative overflow-hidden bg-transparent px-6 pt-32 pb-16 md:px-10 md:pb-24 md:pt-40 min-h-[95vh] flex items-center">
       <div className="container relative z-20 mx-auto">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-2 lg:gap-16">
+          {/* ── Columna izquierda: texto ── */}
           <div className="max-w-3xl">
             <Reveal>
               <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold shadow-[0_0_15px_rgba(232,151,33,0.1)]">
@@ -141,8 +168,8 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <h1 className="text-5xl font-extrabold leading-[1.1] text-white md:text-6xl lg:text-[4.5rem]" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                Minería con <br/>
+              <h1 className="text-5xl font-extrabold leading-[1.1] text-foreground md:text-6xl lg:text-[4.5rem]" style={{ fontFamily: "var(--font-montserrat)" }}>
+                Minería con <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-yellow-200">
                   propósito
                 </span>
@@ -150,8 +177,8 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={0.2}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70 md:text-xl font-light">
-                En Coodmilla integramos tecnología avanzada, máxima seguridad industrial y sostenibilidad ambiental para desarrollar proyectos mineros que generan valor real.
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl font-light">
+                En Coodmilla integramos tecnología avanzada, máxima seguridad industrial y sostenibilidad ambiental para desarrollar operaciones mineras que generan valor real.
               </p>
             </Reveal>
 
@@ -164,59 +191,24 @@ export function Hero() {
                   Solicitar información
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
-                <Link
-                  href="/proyectos"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-8 py-4 text-sm font-bold text-white transition-all hover:border-gold hover:bg-gold/10 hover:text-gold hover:scale-105"
-                >
-                  Ver proyectos
-                </Link>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.4}>
-              <div className="mt-16 flex gap-10 border-t border-white/10 pt-8 md:gap-16">
-                {[
-                  { value: "+12", label: "Años de Exp." },
-                  { value: "+45", label: "Proyectos Activos" },
-                  { value: "+800", label: "Empleos Generados" },
-                ].map((m) => (
-                  <div key={m.label} className="flex flex-col gap-1">
-                    <div className="text-3xl font-extrabold text-white md:text-4xl tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                      <span className="text-transparent bg-clip-text bg-gradient-to-br from-gold to-yellow-200">{m.value}</span>
-                    </div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-white/50">
-                      {m.label}
-                    </p>
-                  </div>
-                ))}
               </div>
             </Reveal>
           </div>
 
-          <div className="hidden lg:grid grid-cols-2 gap-4 relative">
-            {/* Glowing effect behind grid */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-gold/20 blur-[100px] rounded-full pointer-events-none" />
-            
-            {[
-              { icon: Pickaxe, title: "Extracción", desc: "Minería Responsable", bg: "from-green-900 to-green-950", border: "border-green-500/30" },
-              { icon: Settings, title: "Ingeniería", desc: "Procesos Optimizados", bg: "from-amber-600/20 to-amber-900/20", border: "border-gold/30", style: { marginTop: "2rem" } },
-              { icon: Globe, title: "Impacto", desc: "Desarrollo Local", bg: "from-green-600/20 to-green-900/20", border: "border-green-400/30", style: { marginTop: "-2rem" } },
-              { icon: Microscope, title: "Innovación", desc: "Tecnología Punta", bg: "from-neutral-800 to-neutral-900", border: "border-white/10" },
-            ].map((block, i) => (
-              <Reveal key={i} delay={0.3 + i * 0.1}>
-                <div
-                  className={`flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br ${block.bg} border ${block.border} backdrop-blur-xl transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:border-gold/50 cursor-pointer group h-48`}
-                  style={block.style}
-                >
-                  <div className="p-4 rounded-full bg-white/10 mb-4 group-hover:scale-110 transition-transform duration-500 group-hover:bg-gold/20">
-                    <block.icon className="h-8 w-8 text-white group-hover:text-gold transition-colors" />
-                  </div>
-                  <h3 className="font-bold text-white tracking-wide" style={{ fontFamily: 'var(--font-montserrat)' }}>{block.title}</h3>
-                  <p className="text-xs text-white/60 mt-1 uppercase tracking-wider font-medium">{block.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          {/* ── Columna derecha: carrusel dinámico o bloques estáticos ── */}
+          <Reveal delay={0.3} className="w-full mt-10 lg:mt-0">
+            <div className="relative h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px] w-full">
+              {/* Glowing effect behind */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold/15 blur-[100px] rounded-full pointer-events-none" />
+              <div className="relative h-full w-full">
+                {tieneCarrusel ? (
+                  <CarruselDinamico items={carruselItems} />
+                ) : (
+                  <StaticBlocks />
+                )}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

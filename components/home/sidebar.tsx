@@ -4,13 +4,11 @@ import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
 const sections = [
+  { id: "hero", label: "Inicio" },
   { id: "about", label: "Nosotros" },
   { id: "services", label: "Servicios" },
-  { id: "stats", label: "Estadísticas" },
   { id: "certificates", label: "Certificaciones" },
-  { id: "projects", label: "Proyectos" },
-  { id: "news", label: "Noticias" },
-  { id: "contact", label: "Contacto" },
+  { id: "noticias", label: "Noticias" },
 ]
 
 export function Sidebar() {

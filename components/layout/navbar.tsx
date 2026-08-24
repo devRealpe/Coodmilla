@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/nosotros", label: "Nosotros" },
   { href: "/servicios", label: "Servicios" },
   { href: "/certificaciones", label: "Certificaciones" },
-  { href: "/proyectos", label: "Proyectos" },
+
   { href: "/noticias", label: "Noticias" },
 ]
 
@@ -40,33 +40,42 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        isScrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-sm border-b border-border/40 py-3"
-          : "bg-transparent py-5"
+        "fixed left-0 right-0 z-50 transition-all duration-500 flex justify-center px-4 md:px-6 pointer-events-none",
+        isScrolled ? "top-4" : "top-6"
       )}
     >
-      <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
+      <div className={cn(
+        "w-full max-w-7xl rounded-full transition-all duration-700 p-[1px] pointer-events-auto group/nav",
+        isScrolled 
+          ? "bg-gradient-to-r from-gold/50 via-amber-200/30 to-gold/50 shadow-[0_10px_40px_rgba(232,151,33,0.18)]"
+          : "bg-gradient-to-r from-gold/30 via-amber-200/10 to-gold/30 shadow-[0_8px_32px_rgba(232,151,33,0.08)] hover:from-gold/40 hover:to-gold/40"
+      )}>
+        <div className={cn(
+          "w-full h-full rounded-full transition-all duration-500 flex items-center justify-between px-6 md:px-8",
+          isScrolled
+            ? "bg-background/95 backdrop-blur-xl py-3"
+            : "bg-background/80 backdrop-blur-lg py-4"
+        )}>
         <Link href="/" className="flex items-center gap-3 group">
           <div className={cn(
             "relative flex h-11 w-11 items-center justify-center rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105 overflow-hidden",
-            isScrolled ? "bg-white/10" : "bg-white/10"
+            isScrolled ? "bg-foreground/10 dark:bg-white/10" : "bg-foreground/10 dark:bg-white/10"
           )}>
             <img src="/logo.jpeg" alt="Coodmilla Logo" className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col">
             <span className={cn(
               "font-extrabold text-2xl tracking-tighter leading-none transition-colors",
-              isScrolled ? "text-foreground" : "text-white"
+              isScrolled ? "text-foreground" : "text-foreground"
             )} style={{ fontFamily: 'var(--font-montserrat)' }}>COODMILLA</span>
             <span className={cn(
               "text-[10px] uppercase tracking-[0.2em] font-semibold mt-1 transition-colors",
-              isScrolled ? "text-primary" : "text-white/80"
+              isScrolled ? "text-primary" : "text-foreground/80"
             )}>Minería e Ingeniería</span>
           </div>
         </Link>
 
-        <ul className="hidden xl:flex items-center gap-8">
+        <ul className="hidden xl:flex items-center gap-10 lg:gap-12">
           {navLinks.map((link) => {
             const isActive = pathname === link.href
             return (
@@ -74,11 +83,12 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "relative text-sm font-medium transition-colors after:absolute after:left-0 after:-bottom-1.5 after:h-0.5 after:w-0 after:rounded-full after:transition-all after:duration-300 hover:after:w-full",
-                    isActive && "after:w-full",
+                    "relative text-base tracking-wide transition-all duration-300 hover:-translate-y-0.5",
+                    "after:absolute after:left-1/2 after:-bottom-2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 hover:after:w-full",
+                    isActive ? "font-semibold after:w-full" : "font-medium",
                     isScrolled
-                      ? "text-foreground/80 hover:text-primary after:bg-primary"
-                      : "text-white/80 hover:text-white after:bg-gold"
+                      ? (isActive ? "text-gold after:bg-gold" : "text-foreground/90 hover:text-gold after:bg-gold")
+                      : (isActive ? "text-gold after:bg-gold" : "text-foreground/90 hover:text-gold after:bg-gold")
                   )}
                 >
                   {link.label}
@@ -96,7 +106,7 @@ export function Navbar() {
               "inline-flex items-center rounded-full px-6 py-2.5 text-sm font-bold shadow-md transition-all hover:-translate-y-0.5",
               isScrolled
                 ? "bg-gradient-to-r from-accent to-accent/80 text-accent-foreground shadow-accent/20 hover:shadow-accent/40"
-                : "bg-white text-dark hover:bg-gold hover:text-white border border-transparent"
+                : "bg-foreground text-background hover:bg-gold hover:text-white border border-transparent dark:bg-white dark:text-dark"
             )}
           >
             Contactanos
@@ -108,7 +118,7 @@ export function Navbar() {
           <button
             className={cn(
               "flex items-center justify-center p-2 rounded-lg transition-colors",
-              isScrolled ? "text-foreground hover:bg-black/5" : "text-white hover:bg-white/10"
+              isScrolled ? "text-foreground hover:bg-foreground/5" : "text-foreground hover:bg-foreground/10"
             )}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
@@ -116,6 +126,7 @@ export function Navbar() {
             {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
+      </div>
       </div>
 
       {/* Mobile Menu */}

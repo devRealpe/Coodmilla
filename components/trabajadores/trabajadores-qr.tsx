@@ -75,7 +75,7 @@ export function TrabajadoresQR({ trabajadores, baseUrl }: TrabajadoresQRProps) {
               className="text-sm font-bold tracking-wide text-foreground"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              Coodmilla LTDA
+              Coodmilla
             </span>
           </div>
 
@@ -200,7 +200,7 @@ export function TrabajadoresQR({ trabajadores, baseUrl }: TrabajadoresQRProps) {
                       {t.nombreCompleto}
                     </p>
                     <p className="mt-0.5 text-[11px] text-muted-foreground">
-                      Asociado Coodmilla LTDA
+                      Asociado Coodmilla
                     </p>
                     <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:text-emerald-400">
                       <span className="size-1.5 rounded-full bg-emerald-500" />
@@ -271,7 +271,7 @@ export function TrabajadoresQR({ trabajadores, baseUrl }: TrabajadoresQRProps) {
       {/* ── Footer mínimo ────────────────────────────────────────── */}
       <footer className="border-t border-foreground/8 py-4 text-center">
         <p className="text-[11px] text-muted-foreground/60">
-          © {new Date().getFullYear()} Coodmilla LTDA · Cooperativa del Distrito Minero de La Llanada
+          © {new Date().getFullYear()} Coodmilla · Cooperativa del Distrito Minero de La Llanada
         </p>
       </footer>
 
@@ -321,7 +321,7 @@ export function TrabajadoresQR({ trabajadores, baseUrl }: TrabajadoresQRProps) {
                 {selectedTrabajador.nombreCompleto}
               </h2>
               <p className="mb-4 text-sm font-medium text-muted-foreground">
-                Asociado Coodmilla LTDA
+                Asociado Coodmilla
               </p>
 
               <div className="mb-6 flex justify-center gap-2">

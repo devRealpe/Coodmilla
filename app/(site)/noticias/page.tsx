@@ -7,8 +7,13 @@ import Link from "next/link"
 import Image from "next/image"
 
 export const metadata: Metadata = {
-  title: "Noticias — Coodmilla",
+  title: "Noticias",
   description: "Últimas noticias y novedades de Coodmilla sobre minería, sostenibilidad y desarrollo comunitario en Colombia.",
+  alternates: { canonical: "/noticias" },
+  openGraph: {
+    title: "Noticias — Coodmilla",
+    description: "Últimas noticias y novedades de Coodmilla.",
+  },
 }
 
 // ─── Gradientes de fallback por índice ───────────────────────────────────────

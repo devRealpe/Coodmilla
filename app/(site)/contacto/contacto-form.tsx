@@ -4,15 +4,14 @@ import { useState, useRef } from "react"
 
 const contactInfo = [
   { icon: "📍", text: "Calle 9 No 2-41 B/Corazón de Jesús | La Llanada, Nariño - Colombia" },
-  { icon: "📞", text: "+57 316-832-7056" },
-  { icon: "✉", text: "codmilla.redes@gmail.com" },
-  { icon: "🕐", text: "Lun–Vie 8:00–18:00  |  Sáb 9:00–14:00" },
+  { icon: "✉", text: "contactenoscoodmila@gmail.com" },
+  { icon: "🕐", text: "Lun, Mié, Vie 8:00–12:00 / 14:00–18:00 · Mar, Jue 8:00–12:00 / 14:00–19:00" },
 ]
 
 const socialLinks = [
   {
     label: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/share/1CBpJ4NuyW/",
     color: "#1877F2",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
@@ -22,35 +21,13 @@ const socialLinks = [
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/coodmillaoficial?igsi=MXd2eTNoNmczazg4Zw==",
     color: "#E4405F",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-4">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    href: "#",
-    color: "#0A66C2",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
-  },
-  {
-    label: "X",
-    href: "#",
-    color: "#000000",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
       </svg>
     ),
   },
@@ -63,6 +40,8 @@ interface FormData {
   email: string
   empresa: string
   mensaje: string
+  /** Honeypot anti-bot — debe permanecer vacío */
+  website: string
 }
 
 interface FieldErrors {
@@ -84,6 +63,7 @@ export function ContactoForm() {
     email: "",
     empresa: "",
     mensaje: "",
+    website: "",
   })
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -140,7 +120,7 @@ export function ContactoForm() {
       }
 
       setStatus("success")
-      setForm({ nombre: "", email: "", empresa: "", mensaje: "" })
+      setForm({ nombre: "", email: "", empresa: "", mensaje: "", website: "" })
     } catch {
       setServerError("Error de conexión. Verifica tu internet e intenta de nuevo.")
       setStatus("error")
@@ -230,7 +210,20 @@ export function ContactoForm() {
                 </button>
               </div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} noValidate>
+              <form ref={formRef} onSubmit={handleSubmit} noValidate className="relative">
+                {/* Honeypot anti-bot — oculto para usuarios reales */}
+                <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                  <label htmlFor="contacto-website">Website</label>
+                  <input
+                    id="contacto-website"
+                    type="text"
+                    name="website"
+                    value={form.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
 
                 {/* Error del servidor */}
                 {status === "error" && serverError && (

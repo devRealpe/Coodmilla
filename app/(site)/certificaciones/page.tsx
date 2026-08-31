@@ -5,9 +5,15 @@ import { getPDFDocumentos, resolveAssetUrl } from "@/lib/api"
 import { Leaf, ShieldCheck, Award, Zap, CheckCircle2 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Certificaciones — Coodmilla",
+  title: "Certificaciones",
   description:
     "Certificaciones internacionales y documentos oficiales de Coodmilla. ISO 14001, ISO 45001, ISO 9001 y más.",
+  alternates: { canonical: "/certificaciones" },
+  openGraph: {
+    title: "Certificaciones — Coodmilla",
+    description:
+      "Certificaciones ISO y documentos oficiales de la cooperativa Coodmilla.",
+  },
 }
 
 // ─── Certificaciones estáticas (siempre se muestran) ─────────────────────────

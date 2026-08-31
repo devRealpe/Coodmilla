@@ -25,12 +25,14 @@ export async function generateMetadata({
   const descripcion = extractPlainText(noticia.contenido, 160)
 
   return {
-    title: `${noticia.titulo} — Coodmilla`,
+    title: noticia.titulo,
     description: descripcion,
+    alternates: { canonical: `/noticias/${slug}` },
     openGraph: {
-      title: noticia.titulo,
+      title: `${noticia.titulo} — Coodmilla`,
       description: descripcion,
       images: noticia.imagenPortada ? [resolveAssetUrl(noticia.imagenPortada)] : [],
+      type: "article",
     },
   }
 }

@@ -6,7 +6,15 @@ import { ServicesCarousel } from "@/components/servicios/services-carousel"
 import { getCarrusel } from "@/lib/api"
 
 export const metadata: Metadata = {
-  title: "Servicios — Coodmilla",
+  title: "Servicios",
+  description:
+    "Servicios de exploración, explotación, comercialización, seguridad minera, ambiental e ingeniería de Coodmilla en La Llanada, Nariño.",
+  alternates: { canonical: "/servicios" },
+  openGraph: {
+    title: "Servicios — Coodmilla",
+    description:
+      "Exploración, explotación, seguridad minera e ingeniería con estándares de sostenibilidad.",
+  },
 }
 
 const categories = [
@@ -64,23 +72,6 @@ const categories = [
     ],
   },
   {
-    title: "Servicios de alojamiento",
-    desc: "Soluciones integrales de hospedaje y alojamiento para trabajadores y comunidad.",
-    services: [
-      { emoji: "🏨", name: "Infraestructura", detail: "Comprar y/o construir infraestructuras destinadas a servicios de alojamiento." },
-      { emoji: "🛌", name: "Servicios de hospedaje", detail: "Hostales, hoteles, ecohoteles, apartamentos, entre otros." },
-      { emoji: "🤝", name: "Convenios de vivienda", detail: "Convenios con entidades cooperativas o de construcción de vivienda." },
-    ],
-  },
-  {
-    title: "Comercialización de combustibles",
-    desc: "Abastecimiento energético confiable para la operación minera y la comunidad en general.",
-    services: [
-      { emoji: "⛽", name: "Combustibles", detail: "Comercialización de combustibles líquidos derivados del petróleo (gasolina, diésel)." },
-      { emoji: "🛢", name: "Lubricantes", detail: "Comercialización de lubricantes como aceites, grasas y líquido de frenos." },
-    ],
-  },
-  {
     title: "Orfebrería y joyería",
     desc: "Creación de valor agregado a la extracción de metales preciosos mediante diseño y manufactura experta.",
     services: [
@@ -96,6 +87,7 @@ const categories = [
       { emoji: "🕊", name: "Auxilios y seguros", detail: "Auxilios funerarios, de incapacidad y seguros colectivos o personales." },
       { emoji: "📚", name: "Educación y becas", detail: "Becas para asociados y familiares, fomento de la educación cooperativa." },
       { emoji: "⚽", name: "Recreación y cultura", detail: "Promoción de centros de recreación y capacitación para la comunidad." },
+      { emoji: "🤝", name: "Plan de gestión social", detail: "Programa dedicado a la comunidad que articula acompañamiento, participación y beneficios sociales en el territorio." },
     ],
   },
 ]
@@ -182,7 +174,7 @@ export default async function ServiciosPage() {
                   <h3 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-montserrat)' }}>Educación Ambiental</h3>
                 </div>
                 <p className="text-muted-foreground font-medium dark:font-light leading-relaxed">
-                  La educación ambiental es vital para comprender las relaciones entre el ser humano y los sistemas naturales. Iniciamos con capacitaciones enfocadas en tipos de contaminación, creando una conciencia real sobre la mitigación de impactos ambientales en nuestra operación diaria.
+                  La educación ambiental es vital para comprender las relaciones entre el ser humano y los sistemas naturales. Iniciamos con capacitaciones enfocadas en tipos de contaminación y realizamos jornadas de capacitación a la comunidad, creando una conciencia real sobre la mitigación de impactos ambientales en nuestra operación diaria.
                 </p>
               </div>
             </Reveal>
@@ -212,7 +204,7 @@ export default async function ServiciosPage() {
                   <h3 className="text-2xl font-bold text-foreground" style={{ fontFamily: 'var(--font-montserrat)' }}>Exportaciones (FAIRMINED)</h3>
                 </div>
                 <p className="text-muted-foreground font-medium dark:font-light leading-relaxed">
-                  Desde 2014, gracias al apoyo de ARM (Alianza por la Minería Responsable), estamos certificados en Minería Justa FAIRMINED. Este sello nos permite exportar, acceder a precios mucho más justos y fortalecer nuestra estructura comunitaria.
+                  En 2014, gracias al apoyo de ARM (Alianza por la Minería Responsable), estamos certificados en Minería Justa FAIRMINED. Este sello nos permite exportar, acceder a precios mucho más justos y fortalecer nuestra estructura comunitaria.
                 </p>
               </div>
             </Reveal>

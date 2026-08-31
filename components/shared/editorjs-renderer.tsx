@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import { resolveAssetUrl } from "@/lib/api"
+import { sanitizeHtml } from "@/lib/sanitize"
 
 // ─── Tipos de Editor.js ────────────────────────────────────────────────────────
 
@@ -73,7 +74,7 @@ function BlockParagraph({ data }: { data: Record<string, unknown> }) {
   return (
     <p
       className="text-base md:text-lg leading-relaxed text-foreground/85"
-      dangerouslySetInnerHTML={{ __html: text }}
+      dangerouslySetInnerHTML={{ __html: sanitizeHtml(text) }}
     />
   )
 }
@@ -98,7 +99,7 @@ function BlockHeader({ data }: { data: Record<string, unknown> }) {
     <Tag
       className={`font-extrabold tracking-tight text-foreground ${sizeClass}`}
       style={{ fontFamily: "var(--font-montserrat)" }}
-      dangerouslySetInnerHTML={{ __html: text }}
+      dangerouslySetInnerHTML={{ __html: sanitizeHtml(text) }}
     />
   )
 }
@@ -111,7 +112,7 @@ function renderListItem(item: RawListItem, key: number): React.ReactElement {
 
   return (
     <li key={key} className="leading-relaxed text-foreground/85">
-      <span dangerouslySetInnerHTML={{ __html: content }} />
+      <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }} />
       {nestedItems.length > 0 && (
         <ul className="mt-1 ml-5 space-y-1 list-disc">
           {nestedItems.map((child, i) => renderListItem(child, i))}
@@ -151,10 +152,10 @@ function BlockQuote({ data }: { data: Record<string, unknown> }) {
       {alignment !== "center" && (
         <div className="absolute -left-[2px] top-0 bottom-0 w-1 bg-gradient-to-b from-gold to-yellow-600 rounded-full" />
       )}
-      <span dangerouslySetInnerHTML={{ __html: text }} />
+      <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(text) }} />
       {caption && (
         <cite className="block mt-2 text-sm not-italic font-semibold text-gold">
-          — <span dangerouslySetInnerHTML={{ __html: caption }} />
+          — <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(caption) }} />
         </cite>
       )}
     </blockquote>
@@ -196,7 +197,7 @@ function BlockTable({ data }: { data: Record<string, unknown> }) {
             <tr>
               {headers.map((cell, i) => (
                 <th key={i} className="px-4 py-3 font-bold text-foreground tracking-wide">
-                  <span dangerouslySetInnerHTML={{ __html: cell }} />
+                  <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(cell) }} />
                 </th>
               ))}
             </tr>
@@ -207,7 +208,7 @@ function BlockTable({ data }: { data: Record<string, unknown> }) {
             <tr key={ri} className="border-b border-foreground/5 dark:border-white/5 last:border-0">
               {row.map((cell, ci) => (
                 <td key={ci} className="px-4 py-3 text-foreground/80">
-                  <span dangerouslySetInnerHTML={{ __html: cell }} />
+                  <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(cell) }} />
                 </td>
               ))}
             </tr>
@@ -261,7 +262,7 @@ function BlockWarning({ data }: { data: Record<string, unknown> }) {
       <span className="text-xl shrink-0">⚠️</span>
       <div>
         {title && <p className="font-bold text-amber-700 dark:text-amber-400 mb-1">{title}</p>}
-        <p className="text-sm text-foreground/80" dangerouslySetInnerHTML={{ __html: message }} />
+        <p className="text-sm text-foreground/80" dangerouslySetInnerHTML={{ __html: sanitizeHtml(message) }} />
       </div>
     </div>
   )
@@ -284,7 +285,7 @@ function BlockChecklist({ data }: { data: Record<string, unknown> }) {
           </span>
           <span
             className={item.checked ? "line-through text-foreground/50" : ""}
-            dangerouslySetInnerHTML={{ __html: item.text }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.text) }}
           />
         </li>
       ))}
@@ -369,7 +370,7 @@ export function EditorJsRenderer({ content, className = "" }: EditorJsRendererPr
           prose-img:rounded-xl
           dark:prose-invert
           ${className}`}
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
       />
     )
   }

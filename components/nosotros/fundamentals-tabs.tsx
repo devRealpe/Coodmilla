@@ -9,19 +9,19 @@ const fundamentals = [
     id: 'mision',
     icon: Target,
     title: "Misión",
-    desc: "COODMILLA LTDA es una empresa multiactiva del sector de la economía solidaria dedicada a la prestación de servicios y oferta de productos relacionados con el sector de la minería subterránea de pequeña escala y de diversas actividades conexas que están dirigidas a brindar oportunidades de desarrollo para nuestra comunidad a través de la mejor gestión técnica, ambiental, social y empresarial.",
+    desc: "COODMILLA es una empresa multiactiva del sector de la economía solidaria dedicada a la prestación de servicios y oferta de productos relacionados con el sector de la minería subterránea de pequeña escala y de diversas actividades conexas que están dirigidas a brindar oportunidades de desarrollo para nuestra comunidad a través de la mejor gestión técnica, ambiental, social y empresarial.",
   },
   {
     id: 'vision',
     icon: Telescope,
     title: "Visión",
-    desc: 'La Cooperativa del Distrito Minero de La Llanada "COODMILLA LTDA" en el año 2030 habrá mejorado significativamente la calidad de vida de sus Asociados y Asociadas al alcanzar una sostenibilidad operativa y financiera, a través de prácticas de producción sustentable, eficiente y consolidando procesos de producción limpia y responsable, que le den a nuestros productos un valor agregado orientado hacia mercados nacionales e internacionales que promuevan el comercio justo y el consumo ético.',
+    desc: 'La Cooperativa del Distrito Minero de La Llanada "COODMILLA" en el año 2030 habrá mejorado significativamente la calidad de vida de sus Asociados y Asociadas al alcanzar una sostenibilidad operativa y financiera, a través de prácticas de producción sustentable, eficiente y consolidando procesos de producción limpia y responsable, que le den a nuestros productos un valor agregado orientado hacia mercados nacionales e internacionales que promuevan el comercio justo y el consumo ético.',
   },
   {
     id: 'ambiental',
     icon: Sprout,
     title: "Compromiso Ambiental",
-    desc: "COODMILLA Ltda. se ha caracterizado desde sus inicios por utilizar procesos de extracción de oro libres de químicos nocivos como el mercurio y el cianuro, aspecto muy importante que le ha dado reconocimiento internacional y le ha facilitado el acceso a mercados internacionales que tienen una ética de consumo acorde con el cuidado y protección del ambiente.",
+    desc: "COODMILLA se ha caracterizado desde sus inicios por utilizar procesos de extracción de oro libres de químicos nocivos como el mercurio y el cianuro, aspecto muy importante que le ha dado reconocimiento internacional y le ha facilitado el acceso a mercados internacionales que tienen una ética de consumo acorde con el cuidado y protección del ambiente.",
   },
 ]
 
@@ -75,7 +75,7 @@ export function FundamentalsTabs() {
               <h3 className="text-3xl md:text-5xl font-black text-foreground mb-6 tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 {activeContent?.title}
               </h3>
-              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-medium dark:font-light">
+              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-medium dark:font-light text-left md:text-justify">
                 {activeContent?.desc}
               </p>
             </div>

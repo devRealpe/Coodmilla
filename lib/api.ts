@@ -6,7 +6,7 @@
  * - Producción: cambiar en .env.local o en la plataforma de despliegue.
  *
  * SEGURIDAD: solo se expone NEXT_PUBLIC_ (cliente) para la URL base.
- * Cualquier secreto adicional (ej. API key futura) debe ir en variables
+ * Cualquier secreto adicional (ej. SMTP) debe ir en variables
  * sin el prefijo NEXT_PUBLIC_ y usarse únicamente en Server Components/Route Handlers.
  */
 
@@ -92,24 +92,16 @@ async function apiFetch<T>(
   }
 }
 
-// ─── Noticias ─────────────────────────────────────────────────────────────────
+// ─── Noticias (endpoints públicos — solo activas) ─────────────────────────────
 
-/** Obtiene todas las noticias. Devuelve array vacío si el backend no responde. */
+/** Obtiene noticias activas. */
 export async function getNoticias(): Promise<Noticia[]> {
-  return (await apiFetch<Noticia[]>("/noticias")) ?? [];
+  return (await apiFetch<Noticia[]>("/publico/noticias")) ?? [];
 }
 
 /** Obtiene las N noticias activas más recientes para mostrar en el home. */
 export async function getNoticiasRecientes(limit = 3): Promise<Noticia[]> {
-  const noticias = await getNoticias();
-  return noticias
-    .filter((n) => n.activo)
-    .sort((a, b) => {
-      const da = a.fechaPublicacion ? new Date(a.fechaPublicacion).getTime() : 0;
-      const db = b.fechaPublicacion ? new Date(b.fechaPublicacion).getTime() : 0;
-      return db - da;
-    })
-    .slice(0, limit);
+  return (await apiFetch<Noticia[]>(`/publico/noticias/recientes?limit=${limit}`)) ?? [];
 }
 
 /** Obtiene las noticias activas: { destacada, resto } */
@@ -118,42 +110,34 @@ export async function getNoticiasParaPagina(): Promise<{
   resto: Noticia[];
 }> {
   const noticias = await getNoticias();
-  const activas = noticias
-    .filter((n) => n.activo)
-    .sort((a, b) => {
-      const da = a.fechaPublicacion ? new Date(a.fechaPublicacion).getTime() : 0;
-      const db = b.fechaPublicacion ? new Date(b.fechaPublicacion).getTime() : 0;
-      return db - da;
-    });
+  const activas = [...noticias].sort((a, b) => {
+    const da = a.fechaPublicacion ? new Date(a.fechaPublicacion).getTime() : 0;
+    const db = b.fechaPublicacion ? new Date(b.fechaPublicacion).getTime() : 0;
+    return db - da;
+  });
 
   const destacada = activas.find((n) => n.destacado) ?? activas[0] ?? null;
   const resto = activas.filter((n) => n.id !== destacada?.id);
   return { destacada, resto };
 }
 
-/** Obtiene una noticia por slug. Devuelve null si no existe o falla el backend. */
+/** Obtiene una noticia activa por slug. */
 export async function getNoticia(slug: string): Promise<Noticia | null> {
-  return apiFetch<Noticia>(`/noticias/${encodeURIComponent(slug)}`, 0);
+  return apiFetch<Noticia>(`/publico/noticias/${encodeURIComponent(slug)}`, 0);
 }
 
 // ─── Carrusel ─────────────────────────────────────────────────────────────────
 
 /** Obtiene los items del carrusel activos, ordenados por `orden`. */
 export async function getCarrusel(): Promise<CarruselItem[]> {
-  const items = (await apiFetch<CarruselItem[]>("/carrusel")) ?? [];
-  return items
-    .filter((c) => c.activo)
-    .sort((a, b) => a.orden - b.orden);
+  return (await apiFetch<CarruselItem[]>("/publico/carrusel")) ?? [];
 }
 
 // ─── PDF Documentos ───────────────────────────────────────────────────────────
 
 /** Obtiene los documentos PDF activos, ordenados por `orden`. */
 export async function getPDFDocumentos(): Promise<PDFDocumento[]> {
-  const docs = (await apiFetch<PDFDocumento[]>("/pdf-documentos")) ?? [];
-  return docs
-    .filter((d) => d.activo)
-    .sort((a, b) => a.orden - b.orden);
+  return (await apiFetch<PDFDocumento[]>("/publico/pdf-documentos")) ?? [];
 }
 
 // ─── Trabajadores (consulta pública via QR) ───────────────────────────────────

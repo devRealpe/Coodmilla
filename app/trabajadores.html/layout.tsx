@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Trabajadores — Coodmilla",
   description:
-    "Consulta pública de trabajadores activos de la Cooperativa del Distrito Minero de La Llanada — Coodmilla LTDA.",
+    "Consulta pública de trabajadores activos de la Cooperativa del Distrito Minero de La Llanada — Coodmilla.",
   robots: { index: false, follow: false }, // No indexar — acceso solo via QR
 }
 

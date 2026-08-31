@@ -4,7 +4,14 @@ import { ShieldCheck, Scale, Leaf, Lightbulb, Users, Globe2 } from "lucide-react
 import { FundamentalsTabs } from "@/components/nosotros/fundamentals-tabs"
 
 export const metadata: Metadata = {
-  title: "Nosotros — Coodmilla",
+  title: "Nosotros",
+  description:
+    "Conoce la historia, misión, visión y valores de Coodmilla, cooperativa de minería responsable en La Llanada, Nariño.",
+  alternates: { canonical: "/nosotros" },
+  openGraph: {
+    title: "Nosotros — Coodmilla",
+    description: "Historia, misión, visión y valores de Coodmilla.",
+  },
 }
 
 const valores = [
@@ -17,26 +24,27 @@ const valores = [
 ]
 
 const structure = [
-  { name: "Milton Santander Morillo", role: "Presidente - Consejo de Administración", initials: "MS" },
-  { name: "Roberto Carlos Otero R.", role: "Vicepresidente - Consejo de Administración", initials: "RO" },
+  { name: "Roberto Carlos Otero R.", role: "Presidente - Consejo de Administración", initials: "RO" },
+  { name: "José Bernardo Yela F.", role: "Vicepresidente - Consejo de Administración", initials: "JY" },
   { name: "Narcisa De Jesús Yela Y.", role: "Miembro Principal - Consejo de Adm.", initials: "NY" },
-  { name: "Johanna Patricia Meneses R.", role: "Miembro Principal - Consejo de Adm.", initials: "JM" },
-  { name: "José Bernardo Yela F.", role: "Miembro Principal - Consejo de Adm.", initials: "JY" },
+  { name: "Milton Santander Morillo", role: "Miembro Principal - Consejo de Adm.", initials: "MS" },
   { name: "Óscar Diego Arciniegas Y.", role: "Miembro Principal - Consejo de Adm.", initials: "OA" },
 
-  { name: "Jefferson Zambrano Yela", role: "Presidente - Junta de Vigilancia", initials: "JZ" },
-  { name: "Mauricio Rodríguez Yela", role: "Vicepresidente - Junta de Vigilancia", initials: "MR" },
-  { name: "Nelson Rubiano Otero M.", role: "Secretario - Junta de Vigilancia", initials: "NR" },
-  { name: "Ever Eliel Chamorro R.", role: "Miembro Suplente - Junta de Vigilancia", initials: "EC" },
+  { name: "Sary Toro", role: "Presidenta - Junta de Vigilancia", initials: "ST" },
+  { name: "Maryuri Edith Riascos", role: "Secretaria - Junta de Vigilancia", initials: "MR" },
+  { name: "Jesid Romel Rosero", role: "Miembro - Junta de Vigilancia", initials: "JR" },
+  { name: "Ferney Portillo", role: "Miembro - Junta de Vigilancia", initials: "FP" },
+  { name: "Fredy Alvarez", role: "Miembro - Junta de Vigilancia", initials: "FA" },
+  { name: "Alejandro Montenegro", role: "Miembro - Junta de Vigilancia", initials: "AM" },
 
   { name: "Edy Yoli Morales M.", role: "Revisor Fiscal", initials: "EM" },
   { name: "Guillermo Andrés Riascos M.", role: "Gerente", initials: "GR" },
 ]
 
 const timeline = [
-  { year: "Orígenes", event: "Hablar de historia en el municipio de La Llanada, Nariño, nos conduce inevitablemente a hablar de minería, y hablar de minería en la tierra de los Abades, nos lleva por esa misma vía de lo inexorable, a hablar de la Cooperativa del Distrito Minero de La Llanada." },
+  { year: "Orígenes", event: "Hablar de historia en el municipio de La Llanada, Nariño, nos conduce inevitablemente a hablar de minería, y hablar de minería en la tierra de los Abades, nos lleva por esa misma vía de lo inexorable, a hablar de la Cooperativa del Distrito Minero de La Llanada. A lo largo de su historia cuenta con cuatro títulos de concesión minera otorgados por la Agencia Nacional de Minería; con ellos ha impulsado la economía local y, mediante regalías, ha aportado al desarrollo del departamento." },
   { year: "Años 60", event: "Tras años de extracción foránea y el retiro de compañías extranjeras, movidos por el interés de desarrollar la minería bajo su lengua vernácula, serían los propios hijos de esta región quienes comenzarían a extraer de las venas de este terruño el oro, dispuestos a forjar un mejor porvenir." },
-  { year: "Febrero 1977", event: "Luego de persistir en la convocatoria mediante el bando tradicional, el 28 de febrero de 1977, la asamblea de 59 mineros suscribió el acta de constitución de la organización que hoy es su prolongación en el tiempo: la Cooperativa del Distrito Minero de La Llanada." },
+  { year: "Febrero 1977", event: "Luego de persistir en la convocatoria mediante el bando tradicional, el 28 de febrero de 1977, la asamblea de 59 mineros suscribió el acta de constitución de la organización que hoy es su prolongación en el tiempo: la Cooperativa del Distrito Minero de La Llanada. La constitución formal de la organización se concretó el 30 de mayo del mismo año." },
   { year: "Actualidad", event: "Conmemorando más de 40 años de gesta fundadora, Coodmilla ha contribuido al desarrollo de un pueblo que ha hecho del oro no solo un medio para procurarse existencia, sino un elemento moldeador de su identidad cultural y de una minería responsable sin sustancias contaminantes." },
 ]
 
@@ -71,8 +79,8 @@ export default function NosotrosPage() {
               </div>
 
               <div className="md:w-1/3 md:pb-6 relative before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-gradient-to-b before:from-gold before:to-transparent pl-8">
-                <p className="text-lg leading-relaxed text-muted-foreground md:text-xl font-medium dark:font-light">
-                  Coodmilla nace de la convicción de que la minería puede ser un motor de desarrollo sostenible. Con más de una década de experiencia, hemos construido un modelo que integra innovación tecnológica, responsabilidad ambiental y relación comunitaria.
+                <p className="text-lg leading-relaxed text-muted-foreground md:text-xl font-medium dark:font-light text-justify">
+                  Coodmilla nace de la convicción de que la minería puede ser un motor de desarrollo sostenible. Con más de cuatro décadas de experiencia, hemos construido un modelo que integra innovación tecnológica, responsabilidad ambiental y relación comunitaria.
                 </p>
               </div>
             </div>
@@ -192,7 +200,7 @@ export default function NosotrosPage() {
                           <div className="w-12 h-1 bg-gold/50 rounded-full" />
                         </div>
                         
-                        <p className="text-base md:text-lg text-muted-foreground font-medium dark:font-light leading-relaxed relative z-10">{t.event}</p>
+                        <p className="text-base md:text-lg text-muted-foreground font-medium dark:font-light leading-relaxed relative z-10 text-justify">{t.event}</p>
                       </div>
                     </div>
 
@@ -246,8 +254,8 @@ export default function NosotrosPage() {
             <h2 className="text-4xl font-extrabold leading-tight text-foreground md:text-5xl lg:text-6xl tracking-tight mb-8" style={{ fontFamily: 'var(--font-montserrat)' }}>
               Contexto <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-500 to-yellow-600 dark:to-yellow-200 drop-shadow-sm">Regulatorio</span>
             </h2>
-            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-medium dark:font-light max-w-3xl mx-auto">
-              Debido a la crisis de la minería ilegal y el riesgo del lavado de activos, las normas colombianas son cada vez más exigentes, en este asunto COODMILLA debe superar innumerables dificultades. Los mineros artesanales y de pequeña escala avanzan día a día en el camino de la Minería Bien Hecha, sin embargo, cada requisito representa un costo económico que dificulta dar cumplimiento a todas las exigencias que supone la actividad.
+            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-medium dark:font-light max-w-3xl mx-auto text-justify">
+              Debido a la crisis de la minería ilegal y el riesgo del lavado de activos, las normas colombianas son cada vez más exigentes. En este asunto COODMILLA responde a innumerables requerimientos de los entes de control; cada requisito representa un reto que nos motiva a fortalecer nuestros procesos. Los mineros artesanales y de pequeña escala avanzan día a día en el camino de la Minería Bien Hecha, y cada exigencia nos impulsa a cumplir con mayor rigor y compromiso.
             </p>
           </div>
         </div>

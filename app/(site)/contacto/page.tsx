@@ -2,7 +2,14 @@ import type { Metadata } from "next"
 import { Contact } from "@/components/home/contact"
 
 export const metadata: Metadata = {
-  title: "Contacto — Coodmilla",
+  title: "Contacto",
+  description:
+    "Contáctanos en La Llanada, Nariño. contactenoscoodmila@gmail.com",
+  alternates: { canonical: "/contacto" },
+  openGraph: {
+    title: "Contacto — Coodmilla",
+    description: "Escríbenos o visítanos. Estaremos encantados de atenderte.",
+  },
 }
 
 export default function ContactoPage() {
@@ -37,7 +44,7 @@ export default function ContactoPage() {
               </span>
               <h3 className="text-2xl font-bold text-foreground mb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>Equidad de Género</h3>
               <p className="text-muted-foreground font-light leading-relaxed">
-                En COODMILLA LTDA. declaramos nuestro compromiso con la igualdad y la reducción de brechas de género, promoviendo la equidad en la cultura organizacional y un entorno laboral competitivo donde se visibiliza el empoderamiento de la mujer en toda su diversidad.
+                En COODMILLA declaramos nuestro compromiso con la igualdad y la reducción de brechas de género, promoviendo la equidad en la cultura organizacional y un entorno laboral competitivo donde se visibiliza el empoderamiento de la mujer en toda su diversidad.
               </p>
             </div>
 

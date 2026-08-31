@@ -106,7 +106,7 @@ export function Navbar() {
                     isScrolled ? "text-primary" : "text-foreground/80"
                   )}
                 >
-                  Minería e Ingeniería
+                  Minería Responsable
                 </span>
               </div>
             </Link>

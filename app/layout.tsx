@@ -7,25 +7,51 @@ import "./globals.css";
 const onest = Onest({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  display: "swap",
 });
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.coodmilla.com").replace(/\/+$/, "");
+
 export const metadata: Metadata = {
-  title: "Coodmilla — Minería e Ingeniería",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Coodmilla — Minería Responsable",
+    template: "%s — Coodmilla",
+  },
   description:
-    "Minería con propósito. En Coodmilla integramos tecnología, seguridad y sostenibilidad para desarrollar proyectos mineros que generan valor real.",
+    "Minería con propósito. En Coodmilla integramos tecnología, seguridad y sostenibilidad para desarrollar proyectos mineros que generan valor real en La Llanada, Nariño.",
   icons: {
     icon: "/favicon.ico",
+  },
+  openGraph: {
+    type: "website",
+    locale: "es_CO",
+    url: SITE_URL,
+    siteName: "Coodmilla",
+    title: "Coodmilla — Minería Responsable",
+    description:
+      "Minería con propósito. Tecnología, seguridad y sostenibilidad en proyectos mineros de La Llanada, Nariño.",
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -48,6 +74,28 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <PageBackground />
+
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Coodmilla",
+                url: SITE_URL,
+                email: "contactenoscoodmila@gmail.com",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "Calle 9 No 2-41 B/Corazón de Jesús",
+                  addressLocality: "La Llanada",
+                  addressRegion: "Nariño",
+                  addressCountry: "CO",
+                },
+                description:
+                  "Cooperativa de minería responsable. Tecnología, seguridad y sostenibilidad.",
+              }),
+            }}
+          />
 
           {children}
         </ThemeProvider>

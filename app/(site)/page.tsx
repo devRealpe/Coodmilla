@@ -6,6 +6,14 @@ import { Certificates } from "@/components/home/certificates"
 
 import { News } from "@/components/home/news"
 import { getCarrusel, resolveAssetUrl } from "@/lib/api"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Coodmilla — Minería Responsable",
+  },
+  alternates: { canonical: "/" },
+}
 
 // Server Component: pre-fetcha el carrusel para pasarlo al Hero (Client Component).
 // Las URLs de imagen se resuelven a absolutas aquí (server-side) para que el

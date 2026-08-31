@@ -68,12 +68,12 @@ export function About() {
 
               <div className="mt-8 space-y-6">
                 <p className="text-lg leading-relaxed text-muted-foreground font-medium dark:font-light">
-                  El objeto del acuerdo cooperativo de COODMILLA LTDA es el de producir, ofertar, distribuir, comercializar, exportar e importar bienes y servicios para la satisfacción de las necesidades de los asociados y de la comunidad en general, propendiendo por el mejoramiento de sus condiciones de vida.
+                  El objeto del acuerdo cooperativo de COODMILLA es el de producir, ofertar, distribuir, comercializar, exportar e importar bienes y servicios para la satisfacción de las necesidades de los asociados y de la comunidad en general, propendiendo por el mejoramiento de sus condiciones de vida.
                 </p>
 
                 <div className="relative pl-6 py-2 border-l-4 border-gold/50 bg-gradient-to-r from-gold/5 to-transparent rounded-r-xl">
                   <p className="text-base leading-relaxed text-muted-foreground">
-                    <strong className="text-foreground font-bold">Reconocimiento Internacional:</strong> El oro de Coodmilla Ltda ha sido usado por prestigiosas marcas de joyería europeas como la casa suiza CHOPARD, al igual que ha sido usado en la Palma de Oro del Festival de Cannes y el Premio Nobel de Paz.
+                    <strong className="text-foreground font-bold">Reconocimiento Internacional:</strong> El oro de Coodmilla ha sido usado por prestigiosas marcas de joyería europeas como la casa suiza CHOPARD, al igual que ha sido usado en la Palma de Oro del Festival de Cannes y el Premio Nobel de Paz.
                   </p>
                 </div>
               </div>

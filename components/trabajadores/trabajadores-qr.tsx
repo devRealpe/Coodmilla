@@ -4,16 +4,15 @@ import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { ArrowLeft, Users, CheckCircle2, Clock } from "lucide-react"
-import type { TrabajadorPublico } from "@/lib/api"
+import { resolveAssetUrl, type TrabajadorPublico } from "@/lib/api"
 
 interface TrabajadoresQRProps {
   trabajadores: TrabajadorPublico[]
-  baseUrl: string
 }
 
 const REDIRECT_SECONDS = 15
 
-export function TrabajadoresQR({ trabajadores, baseUrl }: TrabajadoresQRProps) {
+export function TrabajadoresQR({ trabajadores }: TrabajadoresQRProps) {
   const router = useRouter()
   const [segundos, setSegundos] = useState(REDIRECT_SECONDS)
   const [saliendo, setSaliendo] = useState(false)
@@ -170,7 +169,7 @@ export function TrabajadoresQR({ trabajadores, baseUrl }: TrabajadoresQRProps) {
                   <div className="relative shrink-0">
                     <div className="relative size-16 overflow-hidden rounded-xl border-2 border-white/70 shadow-md dark:border-white/10">
                       <Image
-                        src={`${baseUrl}${t.fotoUrl}`}
+                        src={resolveAssetUrl(t.fotoUrl)}
                         alt={`Foto de ${t.nombreCompleto}`}
                         fill
                         sizes="64px"
@@ -293,7 +292,7 @@ export function TrabajadoresQR({ trabajadores, baseUrl }: TrabajadoresQRProps) {
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/40 to-accent/40 blur-md" />
               <div className="relative size-full overflow-hidden rounded-full border-4 border-background shadow-lg">
                 <Image
-                  src={`${baseUrl}${selectedTrabajador.fotoUrl}`}
+                  src={resolveAssetUrl(selectedTrabajador.fotoUrl)}
                   alt={`Foto de ${selectedTrabajador.nombreCompleto}`}
                   fill
                   sizes="128px"

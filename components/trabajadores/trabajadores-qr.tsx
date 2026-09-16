@@ -21,6 +21,22 @@ export function TrabajadoresQR({ trabajadores }: TrabajadoresQRProps) {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const salienteRef = useRef(false)
 
+  // ── Auto-abrir trabajador desde el hash del QR ─────────────────────────────
+  // Ejemplo: /trabajadores.html#ns79  →  busca codigoPublico === "ns79"
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const hash = window.location.hash.replace("#", "").trim()
+    if (!hash) return
+    const encontrado = trabajadores.find(
+      (t) => t.codigoPublico.toLowerCase() === hash.toLowerCase()
+    )
+    if (encontrado) {
+      setSelectedTrabajador(encontrado)
+    }
+  // Se ejecuta solo al montar; trabajadores es estable (viene del servidor)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // ── Función de redirección manual ─────────────────────────────────────────
   const redirigir = () => {
     if (salienteRef.current) return

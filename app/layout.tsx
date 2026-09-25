@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { PageBackground } from "@/components/shared/page-background";
 import "./globals.css";
 
+export const revalidate = 60;
+
 const onest = Onest({
   variable: "--font-sans",
   subsets: ["latin"],

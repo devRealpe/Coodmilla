@@ -52,9 +52,6 @@ const fundadores = [
   "Alberto Benavides", "Alberto Montenegro", "Alfredo López", "Andrés Montenegro", "Ángel Yela", "Antonio Matabajoy", "Antonio Misael Matabajoy", "Augusto Román López B.", "Carlos Guerrón", "Carmelo Morales", "Cornelio Erazo", "Daniel Fidencio Matabajoy", "Diógenes Germán Yela", "Diógenes Jesús Otero", "Domingo Álvarez", "Edgar Emilio Rosero", "Édgar Rojas", "Emilio Otero", "Emilio Yela Riascos", "Floriberto Morales", "Francisco Morales", "Gerardo Cadena", "Guillermo Riascos", "Hernando Rojas", "Hilario Rosero", "Hugo Hernando Guerrero López", "Jesús Belio Yela", "Jose Arquimedes Toro Rosero", "José Camilo Yela G.", "José Elías Rosero", "José Francisco Otero", "José Heriberto Yela Toro", "José Leovigildo Castellano", "José Nazario Franco Guerrero", "José Ramón Castellano", "José Reinaldo Guerrón", "José Teo Riascos", "José Vicente Morales", "José Zenón Otero Castellano", "Juan Yela", "Libardo Arciniegas", "Libardo Rosero", "Lisandro Figueroa", "Luis Efraín Castellano", "Marco Tulio Montenegro", "Marcos Guillermo Cuatín A.", "Milquías Horacio Rosero", "Narciso Rosero", "Nemesio Yela", "Nestor Rosendo Yela", "Néstor Yela Guerrero", "Parmenio Yela", "Pedro Rosero Mora", "Ramiro Campiño", "Riges Robustiano Rosero", "Rodrigo Hernando Guerrón", "Santiago Humberto Campiño", "Serbio Guerrón", "Tomás Alfonso Morales Apráez", "Udilberto Montenegro"
 ]
 
-const asociados = [
-  "ACOSTA RODRIGUEZ MARIA ISABETH", "ALMEIDA BENAVIDES YOHON DEIRO", "ALVAREZ ALVAREZ ALVARO", "ALVAREZ ALVAREZ ANDERSON JORGE", "ALVAREZ ALVAREZ JESUS SILVIO", "ALVAREZ AYALA DANNER ROBIN", "ALVAREZ GUERRERO HERMINSUL JAVIER", "ALVAREZ GUERRERO JAIME ROBERTO", "ALVAREZ GUERRERO MARTIN BERNARDO", "ALVAREZ GUERRERO ROSALBA", "ALVAREZ GUEVARA FREDY HERMINSUL", "ALVAREZ LEITON NELSON JAIRO", "ALVAREZ LEYTON LUCY MAGALY", "ALVAREZ LEYTON RIKI ESTIVEN", "ALVAREZ MORA DIANA ELIZABETH", "ALVAREZ MORALES MOISES", "ALVAREZ NOGUERA JORGE TOMAS", "ALVAREZ RODRIGUEZ SEGUNDO ALFONSO", "ALVAREZ SOLARTE JOSE ROBERTO", "ALVAREZ SPIN JHON EVER", "ALVAREZ YELA YONY JUVENAL", "ARCINIEGAS YELA OSCAR DIEGO", "BACA ERAZO JAIRO ALBERTO", "BRAVO CEBALLOS OSCAR BAYARDO", "BRAVO LOPEZ SEGUNDO FLORIBERTO", "BRAVO RUBIAN ALFREDO", "CADENA AVAREZ KELVIN HERALDO", "CADENA CANAMEJOY HECTOR GERARDO", "CADENA CANAMEJOY JOSE JUSTO ZACARIAS", "CADENA DELGADO PEDRO ERALDO", "CADENA MORA PABLO LIBARDO", "CADENA MORALES PABLO EDISON", "CADENA YELA JARO HUMBERTO", "CAICEDO ROBER NORBEY", "CALPA LARA ERMES IGNACIO", "CAMPIÑO GUERRERO JESUS ALFREDO", "CAMPIÑO GUERRERO LUIS HUMBERTO", "CASTELLANO CADENA JOSE JONY", "CASTELLANO CADENA LEANDRO ALDEMAR", "CASTELLANO PANTOJA LEONARDO FABRICIO", "CHAMORRO QUENORAN SEBASTIAN ALFREDO", "CHAMORRO ROSERO EVER ELIEL", "CHAPARPUED BERNAL JOSE SANTIAGO", "CUAICHAR EMILIANO", "CUATIN ALVAREZ WEIMAR LEONARDO", "CUATIN ZAMBRANO DORIS AMPARO", "ERAZO JOSE LUIS", "ERAZO LOPEZ EDWIN JAIR", "ERAZO LOPEZ OVEIMAR HERNAN", "ESCOBAR SALAZAR JOSE RAMIRO", "GETIAL ACOSTA MARCO HARLEY", "GETIAL GETIAL MARCO TULIO", "GOMEZ JOSE MAXIMINO", "GOMEZ PORTILLO JACKSON STEVEN", "GOYES RIVERA MANUEL JESUS", "GUERRERO MATAVAJOY HUGO ALFONSO", "GUERRERO MONTENEGRO DIOGENES MARIO", "GUERRERO MORILLO HARBI DENNIS", "GUERRERO MORILLO PAULO VLADIMIR", "GUERRERO SOLARTE OTONIEL FABIO", "GUERRON CAMPIÑO CARLOS ARTURO", "GUERRON VALLEJO JAIME", "LEITON BENAVIDES JESUS ERNESTO", "LOPEZ NITO ARTURO", "MAYA GUARNICA JOSE ROMAN", "MELO ALVAREZ ROBERTO", "MELO MORALES JONAS HILARIO", "MELO RODRIGUEZ EDWIN EMIRO", "MENESSES RODRIGUEZ JOHANA PATRICIA", "MENESSES ZAMBRANO AURA MERY", "MENESSES ZAMBRANO ERNESTO WILSON", "MERA CADENA LAUREANO BENITO", "MERA CADENA LUIS ANTONIO", "MERA FUERTES EDISON LEANDRO", "MONTENEGRO CADENA MARCO TULIO", "MONTENEGRO CADENA MARIELA ALICIA", "MONTENEGRO CADENA UDILBERTO", "MONTENEGRO ROJAS WISTON ALEJANDRO", "MORA ANA MILENA", "MORA JESUS ALEJANDRO", "MORA TAPIA JOSE HERNANDO", "MORA TES ANDREA LUCIA", "MORA YELA JESUS LIBARDO", "MORALES ALBA GREIS", "MORALES MORALES DARIO ALEJANDRO", "MORALES RODRIGUEZ OSCAR EDUARDO", "MORAN FIGUEROA DIEGO JESUS", "NARVAEZ CUATIN CARLOS ALBERTO", "OJEDA HERMAN PORFIRIO", "OLIVA ALVAREZ CARLOS ARNULFO", "ORDOÑEZ CORAL DAIRA YAMILE", "OTERO BENAVIDES OLMES YONE", "OTERO MELO NELSON RUBIAN", "OTERO RODRIGUEZ ROBERTO CARLOS", "OTERO ROSERO YERAL CAMILO", "PANTOJA BASTIDAS MIGUEL ANGEL", "PANTOJA PORTILLA ALFONSO MARIA", "PATIÑO TORO SIGIFREDO FERNANDO", "PAZOS VILLAREAL NAZLY SULY", "PAZOS YELA FLAVIO ORLANDO", "PEÑA ALVAREZ GREGORIO", "PEREZ MORALES DIEGO LUIS", "PEREZ MORALES JESUS ENRIQUES", "PORTILLO DIAZ ROBER ERNELIS", "PORTILLO TORO PEDRO ALIRIO", "PORTILLO TORO VILA KATHERINE", "RIASCOS CRIOLLO MARYURI EDITH", "RIASCOS MORALES JESÚS RICHAR", "RIASCOS PORTILLO EDIE ALEXANDER", "RIASCOS PORTILLO ZOILA MIREYA", "RIASCOS ROSERO EMANUEL STIVEN", "RIASCOS ROSERO JAIME FRANCISCO", "RIASCOS SANTANDER ALBERTO ELISERIO", "RODRIGUEZ BENAVIDES ABSALON RIGOBERTO", "RODRIGUEZ BENAVIDES SIXTO EFREN", "RODRIGUEZ LUCY ARGENY", "RODRIGUEZ REVELO MARCO POLO", "RODRIGUEZ ROSALES HONORIO SERAFIN", "RODRIGUEZ YELA LUIS ERNESTO", "RODRIGUEZ YELA MAURICIO", "RODRIGUEZ ZAMBRANO JHON CARLOS", "ROSALES NELSON EDUARDO", "ROSERO ALFREDO GUILMER", "RODRIGUEZ BENAVIDES JAMES RUBIAN", "ROSERO CAICEDO ANCELMO EVELIO", "ROSERO CAMPIÑO FABIAN MAURICIO", "ROSERO CAMPIÑO LEONARDO FAVIO", "ROSERO CUATIN JOHAN SEBASTIAN", "ROSERO CUATIN MARCOS JAVIER", "ROSERO CUATUSMAL OLVER HAMILTON", "ROSERO DE RIASCOS ARAMIS", "ROSERO MORA CELIMO GONZALO", "ROSERO MORA GLADIS ROCIO", "ROSERO MORA GLORIA RUBIELA", "ROSERO MORALES JAVIER IVAN", "ROSERO YELA BRANDON ALEXIS", "ROSERO YELA JESID ROMEL", "ROSERO YELA MANUEL HERNAN", "ROSERO ZAMBRANO HERMES ADRIANO", "ROSERO ZAMBRANO MIYER FERNANDO", "RUIZ GETIAL JOSE ALBERTO", "SALAS GUERRON CARLOS EVER", "SANTANDER MORILLO MILTON", "SOLARTE JESUS ALFREDO", "SOLARTE MELO FERNANDO SEBASTIAN", "SOLARTE SOLARTE JOSE AQUILEO", "TAPIA ALDERETE MARIA CENELIA", "TORO CAICEDO MARIA DEL SOCORRO", "TORO GUERRON MARCIAL GUSTAVO", "TORO GUERRON SARY JAMILE", "VALLEJOS MORA EUDORO BENITO", "VALLEJOS YELA ALFREDO IVAN", "VILLOTA YELA PARMENIO ERMELIS", "YELA BELALCAZAR EMILCEN ADRIANA", "YELA DIAZ DIOGENES GERMAN", "YELA DIAZ RICHAR MAURICIO", "YELA FONTECHA JAIME HIGINIO", "YELA FONTECHA JOSE BERNARDO", "YELA OTERO CRISTIAN DAVID", "YELA PANTOJA CARLOS ARTURO", "YELA PANTOJA LUCY DEL CARMEN", "YELA ROJAS AGUSTIN LIBARDO", "YELA ROJAS ERIBERTO", "YELA ROMO LIBARDO ENRIQUE", "YELA ROSERO JHONNATHAN JAIR", "YELA VALLEJOS GILBERTO", "YELA YELA JOSE DIOGENES", "YELA YELA NARCISA DE JESUS", "ZAMBRANO PORTILLO ANTIDIO", "ZAMBRANO YELA YEFERSON"
-]
 
 export default function NosotrosPage() {
   return (
@@ -283,36 +280,7 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* Asociados Activos Section */}
-      <section className="relative overflow-hidden bg-transparent py-24 md:py-32 border-t border-black/5 dark:border-white/5">
-        <div className="container relative z-10 max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold leading-[1.1] text-foreground md:text-5xl lg:text-6xl tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
-              Nuestra <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-500 to-yellow-600 dark:to-yellow-200 drop-shadow-sm">Gente</span>
-            </h2>
-          </div>
-          <details className="group rounded-[2rem] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.05)] dark:shadow-none [&_summary::-webkit-details-marker]:hidden overflow-hidden transition-all duration-500">
-            <summary className="flex cursor-pointer items-center justify-between p-8 md:p-10 font-bold text-foreground bg-gradient-to-r hover:from-white hover:to-gray-50 dark:hover:from-white/[0.08] dark:hover:to-transparent transition-colors">
-              <span className="text-xl md:text-2xl" style={{ fontFamily: 'var(--font-montserrat)' }}>Asociados Activos ({asociados.length})</span>
-              <span className="shrink-0 transition-transform duration-500 group-open:-rotate-180 bg-gold/10 text-gold p-3 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </summary>
-            <div className="p-8 md:p-10 pt-0 border-t border-black/5 dark:border-white/10 mt-2 bg-white/40 dark:bg-transparent">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-6 mt-6">
-                {asociados.map((nombre, idx) => (
-                  <div key={idx} className="text-sm font-medium text-muted-foreground flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold/50" />
-                    {nombre}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </details>
-        </div>
-      </section>
+
     </>
   )
 }

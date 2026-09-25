@@ -37,7 +37,13 @@ export const metadata: Metadata = {
   description:
     "Minería con propósito. En Coodmilla integramos tecnología, seguridad y sostenibilidad para desarrollar proyectos mineros que generan valor real en La Llanada, Nariño.",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+    ],
   },
   openGraph: {
     type: "website",

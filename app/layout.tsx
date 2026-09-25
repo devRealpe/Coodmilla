@@ -31,11 +31,12 @@ const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.coodmilla.com
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Coodmilla — Minería Responsable",
-    template: "%s — Coodmilla",
+    default: "Coodmilla — Cooperativa de Minería Responsable",
+    template: "%s | Coodmilla",
   },
   description:
-    "Minería con propósito. En Coodmilla integramos tecnología, seguridad y sostenibilidad para desarrollar proyectos mineros que generan valor real en La Llanada, Nariño.",
+    "Descubre Coodmilla: Transformamos la industria con minería responsable, tecnología avanzada y desarrollo sostenible en La Llanada, Nariño. ¡Conoce nuestros proyectos!",
+  keywords: ["Coodmilla", "minería responsable", "cooperativa minera", "sostenibilidad", "La Llanada", "Nariño", "minería segura", "oro sostenible"],
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
@@ -50,9 +51,14 @@ export const metadata: Metadata = {
     locale: "es_CO",
     url: SITE_URL,
     siteName: "Coodmilla",
-    title: "Coodmilla — Minería Responsable",
+    title: "Coodmilla — Cooperativa de Minería Responsable",
     description:
-      "Minería con propósito. Tecnología, seguridad y sostenibilidad en proyectos mineros de La Llanada, Nariño.",
+      "Descubre cómo en Coodmilla integramos tecnología y sostenibilidad para desarrollar proyectos mineros de impacto positivo en Nariño.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Coodmilla — Minería Responsable y con Propósito",
+    description: "Impulsando el desarrollo sostenible con tecnología y seguridad en proyectos mineros de La Llanada, Nariño.",
   },
   alternates: {
     canonical: SITE_URL,
@@ -60,6 +66,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -91,6 +104,8 @@ export default function RootLayout({
                 "@type": "Organization",
                 name: "Coodmilla",
                 url: SITE_URL,
+                logo: `${SITE_URL}/logo.jpeg`,
+                image: `${SITE_URL}/logo.jpeg`,
                 email: "contactenoscoodmila@gmail.com",
                 address: {
                   "@type": "PostalAddress",
@@ -100,7 +115,7 @@ export default function RootLayout({
                   addressCountry: "CO",
                 },
                 description:
-                  "Cooperativa de minería responsable. Tecnología, seguridad y sostenibilidad.",
+                  "Cooperativa del Distrito Minero de La Llanada (Coodmilla). Promovemos la minería responsable, la adopción de tecnologías limpias y el desarrollo sostenible en el departamento de Nariño.",
               }),
             }}
           />
